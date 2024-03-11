@@ -2,4 +2,5 @@
 <resources>
 
     <style name="Theme.Quotif" parent="android:Theme.Material.Light.NoActionBar" />
+    <item name="statusBarColor" type="color">@color/black</item>
 </resources>
