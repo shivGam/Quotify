@@ -39,9 +39,17 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun App() {
     if(DataManager.isLoaded.value){
-        QuoteScreen(data = DataManager.data) {
-
+        if(DataManager.currentPage.value == Screen.List){
+            QuoteScreen(data = DataManager.data) {
+                DataManager.switchScreen(it)
+            }
         }
+        else {
+           DataManager.currentQuote?.let{
+               QuoteItemView(quotes = it)
+           }
+        }
+
     }
     else {
         Box(
@@ -53,5 +61,9 @@ fun App() {
         }
 
     }
+}
+enum class Screen{
+    List,
+    View
 }
 

@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import com.example.quotif.models.Quotes
 
 @Composable
-fun QuoteScreen(data : Array<Quotes> , onClick :()-> Unit ){
+fun QuoteScreen(data : Array<Quotes> , onClick :(quote : Quotes)-> Unit ){
 
         Column {
             Text(text = "Quotify",
@@ -29,8 +29,6 @@ fun QuoteScreen(data : Array<Quotes> , onClick :()-> Unit ){
                     .padding(8.dp, 16.dp)
                     .fillMaxWidth(1f)
             )
-            QuoteList(data = data) {
-                onClick()
-            }
-    }
+            QuoteList(data = data,onClick)
+        }
 }

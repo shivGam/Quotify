@@ -1,11 +1,14 @@
 package com.example.quotif.screens
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -19,10 +22,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.example.quotif.models.DataManager
 import com.example.quotif.models.Quotes
 
 @Composable
 fun QuoteItemView(quotes: Quotes){
+
+    BackHandler {
+        DataManager.switchScreen(null)
+    }
+
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier
@@ -55,12 +64,23 @@ fun QuoteItemView(quotes: Quotes){
                     text = quotes.text ,
                     style = MaterialTheme.typography.headlineMedium,
                     fontFamily = FontFamily.Serif,
-                    modifier = Modifier.padding(16.dp,0.dp,0.dp,0.dp))
+                    modifier = Modifier.padding(16.dp,0.dp,4.dp,0.dp))
                 Spacer(modifier = Modifier.padding(8.dp))
-                Text(text = quotes.author,
-                    style = MaterialTheme.typography.headlineSmall,
-                    modifier = Modifier.padding(16.dp,0.dp,0.dp,0.dp))
+                Box(
+                    contentAlignment = Alignment.TopStart,
+                    modifier = Modifier.padding(16.dp,0.dp,0.dp,0.dp)
+                ) {
+                    Text(text = "-",
+                        modifier = Modifier
+                            .background(Color.Black)
+                            .fillMaxWidth(.5f)
+                            .height(2.dp))
+                    Text(text = quotes.author,
+                        style = MaterialTheme.typography.headlineSmall,
+                        fontWeight = FontWeight.Light,
+                        modifier = Modifier.padding(0.dp,6.dp,0.dp,0.dp))
 
+                }
             }
         }
     }

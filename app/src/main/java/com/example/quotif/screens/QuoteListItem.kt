@@ -28,14 +28,14 @@ import androidx.compose.ui.unit.dp
 import com.example.quotif.models.Quotes
 
 @Composable
-fun QuoteListItem(quotes: Quotes,onClick : () -> Unit){
+fun QuoteListItem(quotes: Quotes,onClick : (quote : Quotes) -> Unit){
     Card(
         elevation = CardDefaults.elevatedCardElevation(4.dp),
         modifier = Modifier.padding(8.dp)
-            .clickable { onClick() },
+            .clickable { onClick(quotes) },
         colors = CardDefaults.cardColors(Color.Black),
     ) {
-        Row(Modifier.padding(2.dp,2.dp,8.dp,2.dp)) {
+        Row(Modifier.padding(2.dp,8.dp,8.dp,2.dp)) {
             Text(text = """ " """,
                 style = MaterialTheme.typography.headlineMedium,
                 color = Color.White,

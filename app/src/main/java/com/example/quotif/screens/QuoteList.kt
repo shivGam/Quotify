@@ -6,12 +6,10 @@ import androidx.compose.runtime.Composable
 import com.example.quotif.models.Quotes
 
 @Composable
-fun QuoteList(data:Array<Quotes> ,onClick : () -> Unit ){
+fun QuoteList(data:Array<Quotes> ,onClick : (quote : Quotes) -> Unit ){
     LazyColumn(content =  {
         items(data){
-            QuoteListItem(quotes = it) {
-                onClick()
-            }
+            QuoteListItem(quotes = it,onClick)
         }
     })
 }
