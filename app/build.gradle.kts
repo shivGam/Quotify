@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    id("com.chaquo.python")
 }
 
 android {
@@ -47,7 +48,31 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+    defaultConfig {
+        ndk {
+            // On Apple silicon, you can omit x86_64.
+            //noinspection ChromeOsAbiSupport
+            abiFilters += listOf("arm64-v8a")
+        }
+    }
+    flavorDimensions += "pyVersion"
+    productFlavors {
+        create("py310") { dimension = "pyVersion" }
+    }
+    chaquopy {
+        defaultConfig {
+            buildPython("C:\\Users\\Pratik Jangam\\AppData\\Local\\Programs\\Python\\Python310\\python.exe")
+        }
+        productFlavors {
+            getByName("py310") { version = "3.10" }
+        }
+        sourceSets.getByName("main") {
+            setSrcDirs(listOf("src/main/python"))
+        }
+    }
 }
+
+
 
 dependencies {
 

@@ -14,6 +14,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
+import com.chaquo.python.Python
+import com.chaquo.python.android.AndroidPlatform
 import com.example.quotif.models.DataManager
 import com.example.quotif.models.Quotes
 import com.example.quotif.screens.QuoteItemView
@@ -26,6 +28,14 @@ import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        if (! Python.isStarted()) {
+            Python.start(AndroidPlatform(this))
+        }
+        val py = Python.getInstance()
+        val module = py.getModule("get_quotes")
+        val fact = module["calculate_factorial"]
+        val num = fact?.call(10)
+
         CoroutineScope(Dispatchers.IO).launch{
             DataManager.loadAsset(applicationContext)
         }
